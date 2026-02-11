@@ -1,110 +1,133 @@
-# E-Commerce Funnel & Conversion Analysis (GA4 & BigQuery)
+# E-commerce Funnel Analysis (GA4 & BigQuery)
 
-## Project Overview
+This project focuses on analyzing Google Analytics 4 (GA4) sample e-commerce data using SQL queries on Google BigQuery.  
+The dataset used in this project is:
 
-This project analyzes Google Analytics 4 (GA4) e-commerce event data using Google BigQuery to understand user behavior across the conversion funnel.
+`bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
 
-The objective is to transform raw event-level data into session-based analytical tables and calculate key conversion metrics such as add-to-cart rate, checkout rate, and purchase conversion rate.
-
-This project was completed as part of hands-on practice in GA4 data modeling and SQL-based funnel analysis.
-
----
-
-## Project Goals
-
-- Prepare a clean GA4 event dataset for BI analysis
-- Perform session-level funnel analysis
-- Calculate traffic channel conversion metrics
-- Compare landing page performance based on purchase conversion
-- Practice working with nested GA4 export schema in BigQuery
+The main objective is to create event-level tables, build conversion funnels, and calculate page-level conversion rates for different years.
 
 ---
 
-## Tech Stack
+## Project Objectives
 
-### Analytics & Database
+- Extract specific GA4 events for selected time periods  
+- Build a conversion funnel based on user sessions  
+- Analyze purchase performance by traffic source  
+- Calculate page-level purchase conversion rates  
+
+---
+
+## Dataset
+
+**Source:**  
+`bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
+
+This dataset contains anonymized GA4 e-commerce event data.
+
+---
+
+## Tasks Performed
+
+### 1. Event Table Creation (2021)
+
+An event-level table was created using only 2021 data and the following events:
+
+- session_start  
+- view_item  
+- add_to_cart  
+- begin_checkout  
+- add_shipping_info  
+- add_payment_info  
+- purchase  
+
+The following fields were extracted:
+
+- event_timestamp  
+- event_date  
+- user_pseudo_id  
+- session_id  
+- event_name  
+- country  
+- device_category  
+- source  
+- medium  
+- campaign  
+
+This table represents user interactions and sessions for the selected events in 2021.
+
+---
+
+### 2. Conversion Funnel Analysis (2021)
+
+A conversion funnel was built using the following events:
+
+- session_start  
+- add_to_cart  
+- begin_checkout  
+- purchase  
+
+Sessions were identified using a combination of:
+
+- user_pseudo_id  
+- session_id  
+
+The following metrics were calculated:
+
+- Total number of sessions  
+- Sessions with add_to_cart  
+- Sessions with begin_checkout  
+- Sessions with purchase  
+
+In addition, the following conversion rates were computed:
+
+- visit_to_cart_rate  
+- visit_to_checkout_rate  
+- visit_to_purchase_rate  
+
+Results were grouped by:
+
+- event_date  
+- source  
+- medium  
+- campaign  
+
+---
+
+### 3. Page-Level Conversion Analysis (2020)
+
+For this task, only 2020 data was used and the following events were selected:
+
+- session_start  
+- purchase  
+
+The page location was extracted from the `page_location` parameter and used as `page_path`.
+
+For each page, the following metrics were calculated:
+
+- Unique session count  
+- Purchase count  
+- Purchase conversion rate  
+
+Results were ordered by conversion rate in descending order.
+
+---
+
+## Technologies Used
+
 - Google BigQuery  
-- Google Analytics 4 (GA4 Export)
-
-### SQL Techniques Used
-- Common Table Expressions (CTEs)
-- UNNEST for nested event parameters
-- Conditional aggregation
-- Date and timestamp transformations
-- Session identification using `user_pseudo_id + session_id`
-- GROUP BY aggregations
+- SQL  
+- Google Analytics 4 sample e-commerce dataset  
 
 ---
 
-## Business Questions Answered
+## Notes
 
-- How many sessions convert into purchases?
-- Where do the largest funnel drop-offs occur?
-- Which traffic channels have the highest conversion rates?
-- Which landing pages contribute most effectively to purchases?
+- Sessions were identified using both `user_pseudo_id` and `session_id`.  
+- Year-based filtering was applied using the `_TABLE_SUFFIX` field.
 
 ---
 
-## Key Results
+## Author
 
-### Funnel Performance (2021)
-
-- Total Sessions Analyzed: **116,514**
-- Total Purchases: **1,092**
-- Overall Purchase Conversion Rate: **0.94%**
-
-The largest drop-off occurs between **add_to_cart** and **checkout**, indicating friction in the checkout initiation stage.
-
----
-
-### Traffic Channel Conversion (2021)
-
-- High session volume does not necessarily lead to high purchase conversion.
-- Some low-volume channels show relatively high conversion efficiency.
-- Conversion performance varies significantly across traffic sources.
-
-Traffic quality matters more than traffic volume.
-
----
-
-### Landing Page Conversion (2020)
-
-- Some landing pages achieved very high conversion rates with low session counts.
-- High-traffic pages do not always generate the highest number of purchases.
-- Entry page intent strongly influences funnel progression.
-
-Landing page structure and user intent alignment impact purchase performance.
-
----
-
-## Project Structure
-
-ecommerce_analysis.sql — Contains all SQL queries used in this project, including:
-
-- Event-level data preparation (2021)
-- Traffic channel conversion analysis
-- Landing page conversion comparison (2020)
-
-data/ — Directory containing the exported query results (.csv files) used to validate calculations and support the analysis.
-
-report/ — Contains the full project report in PDF format.
-
----
-
-## Key Metrics Calculated
-
-- User Sessions  
-- Add-to-Cart Rate  
-- Checkout Rate  
-- Purchase Conversion Rate  
-- Channel-Level Conversion Rate  
-- Landing Page Purchase Conversion Rate  
-
----
-
-## What This Project Demonstrates
-
-- Working with GA4 event-level data in BigQuery  
-- Performing session-based funnel analysis  
-- Writing structured SQL queries using CTEs  
-- Translating raw data into measurable business insights  
+**Aleyna Rapata**
