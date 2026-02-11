@@ -26,6 +26,19 @@ The main objective is to create event-level tables, build conversion funnels, an
 This dataset contains anonymized GA4 e-commerce event data.
 
 ---
+## Project Files
+
+### Data Files
+- [Event-level data (2021)](data/events_2021_selected_events.csv)
+- [Conversion funnel data (2021)](data/conversion_funnel_2021.csv)
+- [Page-level conversion data (2020)](data/page_level_conversion_2020.csv)
+
+### SQL Query
+- [All analysis queries](sql/ecommerce_analysis.sql)
+
+### Report
+- [Project report (PDF)](report/ecommerce_funnel_analysis_report.pdf)
+--
 
 ## Tasks Performed
 
