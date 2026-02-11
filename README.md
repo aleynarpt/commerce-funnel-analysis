@@ -38,7 +38,9 @@ This dataset contains anonymized GA4 e-commerce event data.
 
 ### Report
 - [Project report (PDF)](report/ecommerce_funnel_analysis_report.pdf)
---
+
+
+---
 
 ## Tasks Performed
 
