@@ -29,7 +29,7 @@ This dataset contains anonymized GA4 e-commerce event data.
 ## Project Files
 
 ### Data Files
-- [Event-level data (2021)](data/events_2021_selected_events.csv)
+- [Event-level data (2021)](data/event_level_data_2021.csv)
 - [Conversion funnel data (2021)](data/conversion_funnel_2021.csv)
 - [Page-level conversion data (2020)](data/page_level_conversion_2020.csv)
 
